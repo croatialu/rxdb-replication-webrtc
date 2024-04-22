@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "statusCheckVerify": true,
+  "ignoreDeps": [
+    "eslint"
+  ],
+  "automerge": true,
+  "major": {
+    "automerge": true
+  },
+  "ignorePaths": [],
+  "rebaseStalePrs": true,
+  "prConcurrentLimit": 6,
+  "prHourlyLimit": 2,
+  "dependencyDashboard": false
+}
