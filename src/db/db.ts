@@ -54,7 +54,7 @@ export async function createDatabase() {
   })
 
   /**
-   * OLD, When the number of collections increases, the number of
+   * When the number of collections increases, the number of
    * sockets will increase, and the number of peers will also
    * increase
    */
