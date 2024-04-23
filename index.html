@@ -9,6 +9,14 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      // @ts-expect-error type error
+      window.process = {
+        nextTick: (fn, ...args) => setTimeout(() => fn(...args)),
+      }
+
+      window.global = window
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "bun@1.1.2",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -20,7 +20,9 @@
     "@unocss/reset": "^0.59.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "rxdb": "^15.18.1",
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.13.0",
@@ -46,7 +48,7 @@
     "vite-plugin-pwa": "^0.19.8"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "bunx lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"
