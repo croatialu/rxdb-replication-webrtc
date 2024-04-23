@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   RouterProvider,
@@ -11,6 +10,8 @@ import '@unocss/reset/normalize.css'
 import 'virtual:uno.css'
 
 import './index.css'
+import Normal from './pages/normal/index.tsx'
+import Shared from './pages/shared/index.tsx'
 
 const router = createBrowserRouter([
   {
@@ -18,10 +19,16 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: 'about',
-    element: <div>About</div>,
+    path: '/normal',
+    element: <Normal />,
   },
-])
+  {
+    path: '/shared',
+    element: <Shared />,
+  },
+], {
+  basename: '/rxdb-replication-webrtc',
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RouterProvider router={router} />,

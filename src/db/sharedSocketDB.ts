@@ -13,15 +13,12 @@ import { RxDBCleanupPlugin } from 'rxdb/plugins/cleanup'
 import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election'
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie'
 import {
-  getConnectionHandlerSimplePeer,
-  replicateWebRTC,
-} from 'rxdb/plugins/replication-webrtc'
-import {
   userSchema,
 } from './collections/user'
 import type { DatabaseCollections } from './collections'
 
 import { postSchema } from './collections/post'
+import { getConnectionHandlerSimplePeer, replicateWebRTC } from './rxdb-plugins/replication-webrtc'
 
 addRxPlugin(RxDBLeaderElectionPlugin)
 addRxPlugin(RxDBDevModePlugin)
@@ -54,16 +51,17 @@ export async function createDatabase() {
   })
 
   /**
-   * OLD, When the number of collections increases, the number of
-   * sockets will increase, and the number of peers will also
-   * increase
+   * NEW
    */
-  Object.keys(database.collections).forEach((key) => {
-    replicateWebRTC({
+  const creator = getConnectionHandlerSimplePeer({})
+  //                        ^ create a creator
+  Object.keys(database.collections).map(async (key) => {
+    return replicateWebRTC({
       collection:
         database.collections[key as keyof typeof database.collections],
-      connectionHandlerCreator: getConnectionHandlerSimplePeer({}),
-      topic: `${dbName}__${key}`,
+      connectionHandlerCreator: creator,
+      //                           ^ use the creator
+      topic: dbName,
       pull: {},
       push: {},
     })

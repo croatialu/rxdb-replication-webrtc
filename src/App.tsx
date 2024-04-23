@@ -1,31 +1,17 @@
-import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './App.css'
-import type { Database } from './db/db'
-import { createDatabase } from './db/db'
-import { UserList } from './components/UserList'
 
 function App() {
-  const [database, setDatabase] = useState<Database>(0)
-
-  useEffect(() => {
-    createDatabase().then((db) => {
-      setDatabase(db)
-    })
-  }, [])
-
-  if (!database)
-    return <div>Loading....</div>
-
   return (
     <div style={{ display: 'flex', gap: '4px' }}>
-      <UserList
-        title="User List"
-        collection={database.user}
-      />
-      <UserList
-        title="Post List"
-        collection={database.post}
-      />
+      <ul>
+        <li>
+          <Link to="/normal">normal ( the way of the default connection signaling service of rxdb. )</Link>
+        </li>
+        <li>
+          <Link to="/shared">shared ( the way of the cache socket )</Link>
+        </li>
+      </ul>
     </div>
   )
 }
